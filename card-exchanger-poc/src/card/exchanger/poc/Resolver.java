@@ -25,20 +25,20 @@ public class Resolver {
         }
         return getFoundExchangeChains(allExchangeChains);
     }
-    
+
     public Exchange[] calculateBestExchangeCombination() {
         Set<Exchange> currentExchangeChain = new HashSet<Exchange>();
         Set<Exchange> currentBestExchangeChain = new HashSet<Exchange>();
-        int currentBest=0;
-        
+        int currentBest = 0;
+
         final Set<Exchange> possibleExchanges = new HashSet<>(Arrays.asList(allPossibleExchanges));
         final Set<Exchange> exchanges = new HashSet<>();
         for (Exchange exchange : possibleExchanges) {
-            currentExchangeChain=doNextExchange(new HashSet<>(possibleExchanges), new HashSet<Exchange>(exchanges), exchange);
-            int currentValue=currentExchangeChain.size();
-            if(currentValue>currentBest) {
-                currentBest=currentValue;
-                currentBestExchangeChain=currentExchangeChain;
+            currentExchangeChain = doNextExchange(new HashSet<>(possibleExchanges), new HashSet<Exchange>(exchanges), exchange);
+            int currentValue = currentExchangeChain.size();
+            if (currentValue > currentBest) {
+                currentBest = currentValue;
+                currentBestExchangeChain = currentExchangeChain;
             }
         }
         return currentBestExchangeChain.toArray(new Exchange[currentBestExchangeChain.size()]);

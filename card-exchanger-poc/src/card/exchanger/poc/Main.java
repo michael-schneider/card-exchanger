@@ -1,4 +1,3 @@
-
 package card.exchanger.poc;
 
 import java.util.Random;
@@ -51,7 +50,7 @@ public class Main {
 
     public void testGetBestPossibleExchangesBigExample() {
         // Arrange
-        final Random r=new Random();
+        final Random r = new Random();
         final int NUM_CARD_TYPES = 375;
         final int NUM_PERSONS = 30;
         final int NUM_DOUBLE = 30;
@@ -66,13 +65,13 @@ public class Main {
         for (int i = 0; i < persons.length; i++) {
             String[] doubleCards = new String[NUM_DOUBLE];
             for (int j = 0; j < doubleCards.length; j++) {
-                doubleCards[j]=cards[r.nextInt(NUM_CARD_TYPES)];
+                doubleCards[j] = cards[r.nextInt(NUM_CARD_TYPES)];
             }
             String[] missingCards = new String[NUM_MISSING];
             for (int j = 0; j < missingCards.length; j++) {
-                missingCards[j]=cards[r.nextInt(NUM_CARD_TYPES)];
+                missingCards[j] = cards[r.nextInt(NUM_CARD_TYPES)];
             }
-            persons[i]=new Person(doubleCards, missingCards);
+            persons[i] = new Person(doubleCards, missingCards);
         }
 
         // Act
@@ -96,13 +95,11 @@ public class Main {
         return sb.toString().toUpperCase();
     }
 
-
-    
     public static void main(String[] args) {
         final Main main = new Main();
-        
-        main.testGetBestPossibleExchangesBigExample();
-        main.testGetBestPossibleExchangesBigExample();
+
+        //main.testGetBestPossibleExchangesBigExample();
+        main.testGetBestPossibleExchangesKnownExample();
         main.testGetAllPossibleExchangesKnownExample();
     }
 }

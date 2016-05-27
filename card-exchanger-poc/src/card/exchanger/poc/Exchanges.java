@@ -5,7 +5,7 @@ import java.util.Set;
 
 /**
  * Calculates all exchanges possible given users with double and missing cards.
- * 
+ *
  * @author Michael Schneider
  */
 public class Exchanges {
@@ -31,18 +31,7 @@ public class Exchanges {
                 if (exchangePartner == person) {
                     continue;
                 }
-                String lastCard="";
-                int id=0;
                 for (String doubleCard : doubleCards) {
-                    // individualize cards of the same type;
-                    if(lastCard.equals(doubleCard)) {
-                        id++;
-                    } else {                        
-                        lastCard=doubleCard;
-                        id=0;
-                    }
-                    String individualizedDoubleCard=String.format("%s/%d", doubleCard, id);
-                    
                     if (exchangePartner.isCardMissing(doubleCard)) {
                         for (String missingCard : missingCards) {
                             if (exchangePartner.isCardDouble(missingCard)) {
@@ -56,5 +45,5 @@ public class Exchanges {
             }
 
         }
-    }    
+    }
 }

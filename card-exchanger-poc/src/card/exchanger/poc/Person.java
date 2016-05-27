@@ -18,7 +18,7 @@ public class Person {
     public Person(String[] doubleCards, String[] missingCards) {
         this.doubleCards = Arrays.copyOf(doubleCards, doubleCards.length);
         this.missingCards = Arrays.copyOf(missingCards, missingCards.length);
-        name=generateName();
+        name = generateName();
     }
 
     public boolean isCardMissing(String card) {
@@ -50,7 +50,7 @@ public class Person {
         Random r = new Random(); // perhaps make it a class variable so you don't make a new one every time
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 8; i++) {
-            char c = (char)((int)(Math.random()*26)+97);
+            char c = (char) ((int) (Math.random() * 26) + 97);
             sb.append(c);
         }
         return sb.toString();
