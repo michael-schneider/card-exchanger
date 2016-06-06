@@ -73,15 +73,15 @@ public class Resolver {
         // Second giver can no longer give card (on both sides)
         possibleExchanges.removeIf(e -> e.secondCard.equals(nextExchange.secondCard) && e.secondPerson.equals(nextExchange.secondPerson));
         possibleExchanges.removeIf(e -> e.firstCard.equals(nextExchange.secondCard) && e.firstPerson.equals(nextExchange.secondPerson));
-        
+
         // First receiver can no longer receive card (on both sides)
         possibleExchanges.removeIf(e -> e.secondCard.equals(nextExchange.secondCard) && e.firstPerson.equals(nextExchange.firstPerson));
         possibleExchanges.removeIf(e -> e.firstCard.equals(nextExchange.secondCard) && e.secondPerson.equals(nextExchange.firstPerson));
-                
+
         // Second receiver can no longer receive card (on both sides)
         possibleExchanges.removeIf(e -> e.secondCard.equals(nextExchange.firstCard) && e.firstPerson.equals(nextExchange.secondPerson));
         possibleExchanges.removeIf(e -> e.firstCard.equals(nextExchange.firstCard) && e.secondPerson.equals(nextExchange.secondPerson));
-        
+
     }
 
     private synchronized void addSolution(final Set<Exchange> possibleExchanges) {
@@ -95,7 +95,7 @@ public class Resolver {
     }
 
     private Exchange[][] getFoundExchangeChainsAsArray() {
-        Exchange[][] ret = new Exchange[foundExchangeChains.size()][];
+        final Exchange[][] ret = new Exchange[foundExchangeChains.size()][];
         int index = 0;
 
         for (Set<Exchange> exchangeChain : foundExchangeChains) {
