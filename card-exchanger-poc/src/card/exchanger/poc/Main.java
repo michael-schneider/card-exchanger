@@ -1,5 +1,6 @@
 package card.exchanger.poc;
 
+import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.Stream;
 
@@ -8,6 +9,55 @@ import java.util.stream.Stream;
  * @author Michael Schneider
  */
 public class Main {
+
+    public void testGetAllPossibleExchangesTrickyExample() {
+        // Arrange
+        Person[] persons = new Person[]{
+            new Person("Person1", new String[]{"A", "B"}, new String[]{"C", "D"}),
+            new Person("Person2", new String[]{"B", "C"}, new String[]{"D", "E"}),
+            new Person("Person3", new String[]{"C", "D"}, new String[]{"E", "A"}),
+            new Person("Person4", new String[]{"D", "E"}, new String[]{"A", "B"}),
+            new Person("Person5", new String[]{"E", "A"}, new String[]{"B", "C"})};
+
+        /*Person[] persons = new Person[]{
+            new Person("Person1", new String[]{"A", "B"}, new String[]{"C", "D"}),
+            new Person("Person3", new String[]{"C", "D"}, new String[]{"E", "A"}),
+            new Person("Person4", new String[]{"D", "E"}, new String[]{"A", "B"}),};*/
+
+        // Act
+        final Exchange[] exchanges = new Exchanges(persons).getAllPossibleExchanges();
+        final Resolver resolver = new Resolver(exchanges);
+
+        System.out.println("--------------------------------------");
+        System.out.println("--------TRICKY ALL--------------------");
+
+        for (Exchange[] foundExchangesChain : resolver.findAllExchangeCombinations()) {
+            System.out.println("--------------------------------------");
+            Stream.of(foundExchangesChain).forEach(System.out::println);
+        }
+
+    }
+
+    public void testGetBestPossibleExchangesTrickyExample() {
+        // Arrange
+        Person[] persons = new Person[]{
+            new Person("Person1", new String[]{"A", "B"}, new String[]{"C", "D"}),
+            new Person("Person2", new String[]{"B", "C"}, new String[]{"D", "E"}),
+            new Person("Person3", new String[]{"C", "D"}, new String[]{"E", "A"}),
+            new Person("Person4", new String[]{"D", "E"}, new String[]{"A", "B"}),
+            new Person("Person5", new String[]{"E", "A"}, new String[]{"B", "C"})};
+
+        // Act
+        final Exchange[] exchanges = new Exchanges(persons).getAllPossibleExchanges();
+
+        final Resolver resolver = new Resolver(exchanges);
+
+        System.out.println("--------------------------------------");
+        System.out.println("-------TRICKY BEST--------------------");
+        System.out.println("--------------------------------------");
+        Stream.of(resolver.findBestExchangeCombination()).forEach(System.out::println);
+
+    }
 
     public void testGetAllPossibleExchangesKnownExample() {
         // Arrange
@@ -21,7 +71,7 @@ public class Main {
         final Resolver resolver = new Resolver(exchanges);
 
         System.out.println("--------------------------------------");
-        System.out.println("--------------ALL---------------------");
+        System.out.println("--------KNOWN ALL---------------------");
 
         for (Exchange[] foundExchangesChain : resolver.findAllExchangeCombinations()) {
             System.out.println("--------------------------------------");
@@ -42,7 +92,7 @@ public class Main {
         final Resolver resolver = new Resolver(exchanges);
 
         System.out.println("--------------------------------------");
-        System.out.println("--------------BEST--------------------");
+        System.out.println("--------KNOWN BEST--------------------");
         System.out.println("--------------------------------------");
         Stream.of(resolver.findBestExchangeCombination()).forEach(System.out::println);
 
@@ -100,6 +150,8 @@ public class Main {
 
         main.testGetBestPossibleExchangesKnownExample();
         main.testGetAllPossibleExchangesKnownExample();
+        main.testGetBestPossibleExchangesTrickyExample();
+        main.testGetAllPossibleExchangesTrickyExample();
         //main.testGetBestPossibleExchangesBigExample();
     }
 }

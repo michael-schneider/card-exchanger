@@ -66,10 +66,22 @@ public class Resolver {
         possibleExchanges.remove(nextExchange);
         exchangesDone.add(nextExchange);
 
+        // First giver can no longer give card (on both sides)
         possibleExchanges.removeIf(e -> e.firstCard.equals(nextExchange.firstCard) && e.firstPerson.equals(nextExchange.firstPerson));
+        possibleExchanges.removeIf(e -> e.secondCard.equals(nextExchange.firstCard) && e.secondPerson.equals(nextExchange.firstPerson));
+
+        // Second giver can no longer give card (on both sides)
         possibleExchanges.removeIf(e -> e.secondCard.equals(nextExchange.secondCard) && e.secondPerson.equals(nextExchange.secondPerson));
         possibleExchanges.removeIf(e -> e.firstCard.equals(nextExchange.secondCard) && e.firstPerson.equals(nextExchange.secondPerson));
-        possibleExchanges.removeIf(e -> e.secondCard.equals(nextExchange.firstCard) && e.secondPerson.equals(nextExchange.firstPerson));
+        
+        // First receiver can no longer receive card (on both sides)
+        possibleExchanges.removeIf(e -> e.secondCard.equals(nextExchange.secondCard) && e.firstPerson.equals(nextExchange.firstPerson));
+        possibleExchanges.removeIf(e -> e.firstCard.equals(nextExchange.secondCard) && e.secondPerson.equals(nextExchange.firstPerson));
+                
+        // Second receiver can no longer receive card (on both sides)
+        possibleExchanges.removeIf(e -> e.secondCard.equals(nextExchange.firstCard) && e.firstPerson.equals(nextExchange.secondPerson));
+        possibleExchanges.removeIf(e -> e.firstCard.equals(nextExchange.firstCard) && e.secondPerson.equals(nextExchange.secondPerson));
+        
     }
 
     private synchronized void addSolution(final Set<Exchange> possibleExchanges) {
