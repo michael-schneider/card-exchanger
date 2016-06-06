@@ -12,9 +12,9 @@ public class Main {
     public void testGetAllPossibleExchangesKnownExample() {
         // Arrange
         Person[] persons = new Person[]{
-            new Person(new String[]{"A", "B"}, new String[]{"C", "D", "E", "F"}),
-            new Person(new String[]{"C", "D"}, new String[]{"A", "B", "E", "F"}),
-            new Person(new String[]{"E", "F"}, new String[]{"A", "B", "C", "D"})};
+            new Person("Person1", new String[]{"A", "B"}, new String[]{"C", "D", "E", "F"}),
+            new Person("Person2", new String[]{"C", "D"}, new String[]{"A", "B", "E", "F"}),
+            new Person("Person3", new String[]{"E", "F"}, new String[]{"A", "B", "C", "D"})};
 
         // Act
         final Exchange[] exchanges = new Exchanges(persons).getAllPossibleExchanges();
@@ -23,7 +23,7 @@ public class Main {
         System.out.println("--------------------------------------");
         System.out.println("--------------ALL---------------------");
 
-        for (Exchange[] foundExchangesChain : resolver.calculateAllExchangeCombinations()) {
+        for (Exchange[] foundExchangesChain : resolver.findAllExchangeCombinations()) {
             System.out.println("--------------------------------------");
             Stream.of(foundExchangesChain).forEach(System.out::println);
         }
@@ -33,9 +33,9 @@ public class Main {
     public void testGetBestPossibleExchangesKnownExample() {
         // Arrange
         Person[] persons = new Person[]{
-            new Person(new String[]{"A", "B"}, new String[]{"C", "D", "E", "F"}),
-            new Person(new String[]{"C", "D"}, new String[]{"A", "B", "E", "F"}),
-            new Person(new String[]{"E", "F"}, new String[]{"A", "B", "C", "D"})};
+            new Person("Person1", new String[]{"A", "B"}, new String[]{"C", "D", "E", "F"}),
+            new Person("Person2", new String[]{"C", "D"}, new String[]{"A", "B", "E", "F"}),
+            new Person("Person3", new String[]{"E", "F"}, new String[]{"A", "B", "C", "D"})};
 
         // Act
         final Exchange[] exchanges = new Exchanges(persons).getAllPossibleExchanges();
@@ -44,7 +44,7 @@ public class Main {
         System.out.println("--------------------------------------");
         System.out.println("--------------BEST--------------------");
         System.out.println("--------------------------------------");
-        Stream.of(resolver.calculateBestExchangeCombination()).forEach(System.out::println);
+        Stream.of(resolver.findBestExchangeCombination()).forEach(System.out::println);
 
     }
 
@@ -81,7 +81,7 @@ public class Main {
         System.out.println("--------------------------------------");
         System.out.println("--------------BIG---------------------");
         System.out.println("--------------------------------------");
-        Stream.of(resolver.calculateBestExchangeCombination()).forEach(System.out::println);
+        Stream.of(resolver.findBestExchangeCombination()).forEach(System.out::println);
 
     }
 
@@ -98,8 +98,8 @@ public class Main {
     public static void main(String[] args) {
         final Main main = new Main();
 
-        //main.testGetBestPossibleExchangesBigExample();
         main.testGetBestPossibleExchangesKnownExample();
         main.testGetAllPossibleExchangesKnownExample();
+        //main.testGetBestPossibleExchangesBigExample();
     }
 }

@@ -14,7 +14,7 @@ public class Exchange {
     final Person secondPerson;
 
     public Exchange(String firstCard, Person firstPerson, String secondCard, Person secondPerson) {
-        if (firstPerson.getName().compareTo(secondPerson.getName()) <0 ) {
+        if (firstPerson.getName().compareTo(secondPerson.getName()) < 0) {
             this.firstCard = firstCard;
             this.firstPerson = firstPerson;
             this.secondCard = secondCard;
@@ -45,7 +45,7 @@ public class Exchange {
 
     @Override
     public String toString() {
-        return String.format("Exchange %s:%s -> %s:%s", firstPerson, firstCard, secondPerson, secondCard);
+        return String.format("Exchange %s:%s <-> %s:%s", firstPerson, firstCard, secondPerson, secondCard);
     }
 
     @Override

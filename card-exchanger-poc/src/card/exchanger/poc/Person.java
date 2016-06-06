@@ -21,6 +21,12 @@ public class Person {
         name = generateName();
     }
 
+    public Person(String name, String[] doubleCards, String[] missingCards) {
+        this.doubleCards = Arrays.copyOf(doubleCards, doubleCards.length);
+        this.missingCards = Arrays.copyOf(missingCards, missingCards.length);
+        this.name = name;
+    }
+
     public boolean isCardMissing(String card) {
         return Arrays.asList(missingCards).contains(card);
     }
@@ -47,8 +53,8 @@ public class Person {
     }
 
     private String generateName() {
-        Random r = new Random(); // perhaps make it a class variable so you don't make a new one every time
-        StringBuilder sb = new StringBuilder();
+        final Random r = new Random(); // perhaps make it a class variable so you don't make a new one every time
+        final StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 8; i++) {
             char c = (char) ((int) (Math.random() * 26) + 97);
             sb.append(c);
